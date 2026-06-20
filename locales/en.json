@@ -1,0 +1,360 @@
+{
+  "lang": "en",
+  "dir": "ltr",
+  "meta": {
+    "title": "Kazakhstan Entrepreneurs Association — the national business union",
+    "description": "The Kazakhstan Entrepreneurs Association unites the country's business community, protects entrepreneurs' interests, and develops Kazakhstan's business environment."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "structure": "Structure",
+    "membership": "Membership",
+    "regions": "Regions",
+    "news": "News",
+    "events": "Events",
+    "partners": "Partners",
+    "ai": "AI Assistant",
+    "cabinet": "Member Area",
+    "contacts": "Contacts"
+  },
+  "langSwitcher": { "kk": "ҚАЗ", "ru": "РУС", "en": "ENG" },
+  "topbar": {
+    "join": "Join",
+    "consult": "Get a consultation"
+  },
+  "hero": {
+    "eyebrow": "National entrepreneurs association",
+    "title": "The national association uniting Kazakhstan's entrepreneurs",
+    "subtitle": "A professional platform built to protect, develop and support business",
+    "cta1": "Join the Association",
+    "cta2": "Get a consultation",
+    "cta3": "Become a member",
+    "cta4": "Contact us",
+    "scroll": "Scroll down"
+  },
+  "about": {
+    "eyebrow": "About the Association",
+    "title": "An independent union of Kazakhstan's entrepreneurs",
+    "who": "The Kazakhstan Entrepreneurs Association is an independent public union representing business interests nationwide — from startups to large holdings.",
+    "historyTitle": "Our history",
+    "history": "The Association was founded by entrepreneurs who came together to systematically protect business, share expertise, and jointly develop the country's business climate.",
+    "goalsTitle": "Goals",
+    "goals": "Uniting entrepreneurs, attracting investment, developing the entrepreneurial environment and increasing the international competitiveness of Kazakhstani companies.",
+    "tasksTitle": "Tasks",
+    "tasks": "Protecting business interests, expert support, export development, digitalization, educational programs and international cooperation.",
+    "benefitsTitle": "Membership benefits",
+    "benefits": [
+      "Access to 14 specialized departments",
+      "Priority expert consultations",
+      "Participation in business missions and forums",
+      "Access to market analytics and research",
+      "Representation of interests at the state level",
+      "Networking with Kazakhstan's business leaders"
+    ]
+  },
+  "mission": {
+    "eyebrow": "Mission",
+    "title": "Unite, protect, develop",
+    "text": "To unite Kazakhstan's entrepreneurs, provide expert support to business, protect the interests of the entrepreneurial community, develop business culture, and promote investment, innovation and the country's sustainable economic development."
+  },
+  "values": {
+    "eyebrow": "Values",
+    "title": "The principles behind our work",
+    "items": [
+      { "name": "Professionalism", "desc": "An expert approach in every project and consultation." },
+      { "name": "Independence", "desc": "An objective stance in protecting business interests." },
+      { "name": "Transparency", "desc": "Openness in working with members and partners." },
+      { "name": "Responsibility", "desc": "Commitments to the country's business community." },
+      { "name": "Partnership", "desc": "Long-term relationships built on trust." },
+      { "name": "Innovation", "desc": "Digital solutions for entrepreneurship development." },
+      { "name": "Entrepreneurship development", "desc": "Supporting business at every stage of growth." },
+      { "name": "International cooperation", "desc": "Connections with foreign partners and markets." }
+    ]
+  },
+  "directions": {
+    "eyebrow": "Areas of work",
+    "title": "What the Association does",
+    "items": [
+      { "name": "Business protection", "desc": "Representing entrepreneurs' interests before the state." },
+      { "name": "Investment", "desc": "Attracting investors and supporting deals." },
+      { "name": "Export", "desc": "Developing the export potential of Kazakhstani companies." },
+      { "name": "Education", "desc": "Courses, seminars and professional development programs." },
+      { "name": "Analytics", "desc": "Market research and industry reviews." },
+      { "name": "Digitalization", "desc": "Implementing AI, CRM and ERP solutions in business." },
+      { "name": "International cooperation", "desc": "Business connections with partners worldwide." },
+      { "name": "Regional development", "desc": "Supporting entrepreneurship in every region of the country." }
+    ]
+  },
+  "stats": {
+    "eyebrow": "Numbers",
+    "title": "The Association in numbers",
+    "items": [
+      { "value": "1200+", "label": "Member entrepreneurs" },
+      { "value": "340+", "label": "Projects implemented" },
+      { "value": "$120M+", "label": "Investment attracted" },
+      { "value": "85+", "label": "Events held" },
+      { "value": "60+", "label": "Partner organizations" },
+      { "value": "17", "label": "Regional offices" }
+    ]
+  },
+  "structure": {
+    "eyebrow": "Association structure",
+    "title": "14 departments — one goal",
+    "subtitle": "Each department provides practical help to business — from legal protection to international cooperation.",
+    "viewAll": "Learn more"
+  },
+  "departments": [
+    {
+      "id": "legal",
+      "name": "Legal Department",
+      "short": "Legal protection and support for business at every stage.",
+      "services": ["Civil law", "Corporate law", "Land law", "Licensing", "Public procurement", "Litigation support", "Business protection", "Legal opinions"],
+      "head": "Head of Department"
+    },
+    {
+      "id": "tax",
+      "name": "Tax Department",
+      "short": "Consulting and support on tax matters.",
+      "services": ["Consulting", "Process optimization", "Reporting preparation", "Audit support", "Tax risk management"],
+      "head": "Head of Department"
+    },
+    {
+      "id": "finance",
+      "name": "Finance Department",
+      "short": "Financial analysis and modeling for business growth.",
+      "services": ["Financial analysis", "Business plans", "Financial modeling", "Lending", "Financial support"],
+      "head": "Head of Department"
+    },
+    {
+      "id": "investment",
+      "name": "Investment Department",
+      "short": "Finding investors and supporting investment deals.",
+      "services": ["Investor search", "Investment forums", "Project packaging", "International investment", "Deal support"],
+      "head": "Head of Department"
+    },
+    {
+      "id": "marketing",
+      "name": "Marketing Department",
+      "short": "Promotion strategies and branding for members.",
+      "services": ["Marketing strategy", "Branding", "Digital marketing", "PR", "Market analytics"],
+      "head": "Head of Department"
+    },
+    {
+      "id": "promotion",
+      "name": "Business Promotion Department",
+      "short": "Promoting member companies in the market.",
+      "services": ["Member promotion", "Exhibitions", "Forums", "Business missions", "Publications"],
+      "head": "Head of Department"
+    },
+    {
+      "id": "risk",
+      "name": "Risk Management Department",
+      "short": "Analyzing and managing business risks.",
+      "services": ["Risk analysis", "Crisis management", "Compliance", "Business security"],
+      "head": "Head of Department"
+    },
+    {
+      "id": "education",
+      "name": "Education Department",
+      "short": "Training and professional development for entrepreneurs.",
+      "services": ["Courses", "Webinars", "Seminars", "Certification", "Professional development"],
+      "head": "Head of Department"
+    },
+    {
+      "id": "export",
+      "name": "Export Center",
+      "short": "Helping Kazakhstani business enter international markets.",
+      "services": ["International markets", "Partner search", "Trade missions", "Export support"],
+      "head": "Head of Department"
+    },
+    {
+      "id": "digital",
+      "name": "Digital Transformation Center",
+      "short": "Implementing AI and automation in business processes.",
+      "services": ["Artificial intelligence", "Business automation", "CRM", "ERP", "Digital solutions"],
+      "head": "Head of Department"
+    },
+    {
+      "id": "analytics",
+      "name": "Analytics Center",
+      "short": "Market research and economic analytics.",
+      "services": ["Market research", "Analytical reports", "Industry reviews", "Economic research"],
+      "head": "Head of Department"
+    },
+    {
+      "id": "gr",
+      "name": "GR & Government Relations Department",
+      "short": "Liaison with government bodies and legislative initiatives.",
+      "services": ["Working with government bodies", "Legislative initiatives", "Protecting business interests", "Expert opinions"],
+      "head": "Head of Department"
+    },
+    {
+      "id": "international",
+      "name": "International Department",
+      "short": "Developing international cooperation and connections.",
+      "services": ["International cooperation", "Foreign partners", "Investment connections", "International projects"],
+      "head": "Head of Department"
+    },
+    {
+      "id": "arbitration",
+      "name": "Arbitration & Mediation Center",
+      "short": "Resolving business disputes without going to court.",
+      "services": ["Pre-trial settlement", "Mediation", "Business disputes", "Arbitration"],
+      "head": "Head of Department"
+    }
+  ],
+  "departmentModal": {
+    "servicesTitle": "Services",
+    "headTitle": "Head",
+    "contactTitle": "Get a consultation",
+    "formName": "Your name",
+    "formPhone": "Phone",
+    "formMessage": "Briefly describe your question",
+    "formSubmit": "Send request",
+    "close": "Close"
+  },
+  "practical": {
+    "eyebrow": "Real help",
+    "title": "What the Association does for business",
+    "items": [
+      "Representing business interests",
+      "Protecting entrepreneurs",
+      "Participating in lawmaking",
+      "Working with government bodies",
+      "Preparing expert opinions",
+      "Finding investors",
+      "Attracting financing",
+      "Organizing business missions",
+      "International negotiations",
+      "Acceleration programs",
+      "Business incubators",
+      "Analytical research",
+      "Forums and exhibitions",
+      "Export development",
+      "Regional entrepreneurship development"
+    ]
+  },
+  "membership": {
+    "eyebrow": "Membership",
+    "title": "Choose your membership format",
+    "subtitle": "Three membership levels — for entrepreneurs at any stage of business growth.",
+    "applyCta": "Apply now",
+    "popular": "Most popular",
+    "packages": [
+      {
+        "name": "STANDARD",
+        "audience": "For early-stage entrepreneurs",
+        "fee": "from 50,000 ₸ / year",
+        "benefits": ["Basic department consultations", "Access to educational programs", "Access to open events", "Association newsletter"]
+      },
+      {
+        "name": "BUSINESS",
+        "audience": "For operating companies",
+        "fee": "from 150,000 ₸ / year",
+        "benefits": ["Priority access to all 14 departments", "Extended market analytics", "Participation in business missions", "Company promotion among partners"]
+      },
+      {
+        "name": "PREMIUM",
+        "audience": "For large companies, investors and holdings",
+        "fee": "Individual terms",
+        "benefits": ["A dedicated Association curator", "Priority in investment projects", "Participation in closed forums", "Representation of interests at the state level"]
+      }
+    ]
+  },
+  "regions": {
+    "eyebrow": "Regional network",
+    "title": "Offices across Kazakhstan",
+    "subtitle": "Association coordinators work in the country's regions, providing local access to services.",
+    "mapNote": "Interactive map of regional offices",
+    "items": [
+      { "city": "Astana", "role": "Association headquarters" },
+      { "city": "Almaty", "role": "Regional office" },
+      { "city": "Shymkent", "role": "Regional coordinator" },
+      { "city": "Atyrau", "role": "Regional coordinator" },
+      { "city": "Karaganda", "role": "Regional coordinator" },
+      { "city": "Aktobe", "role": "Regional coordinator" }
+    ]
+  },
+  "news": {
+    "eyebrow": "News",
+    "title": "News and analytics",
+    "subtitle": "Follow the changes that affect business in Kazakhstan.",
+    "categories": ["Legislation", "Business", "Economy", "Investment", "Export", "Association news"],
+    "empty": "The news section is ready to be connected — materials will be published here.",
+    "readMore": "Read more"
+  },
+  "events": {
+    "eyebrow": "Events",
+    "title": "Business events",
+    "subtitle": "Forums, conferences and business missions for Association members.",
+    "types": ["Forums", "Conferences", "Round tables", "Business breakfasts", "Exhibitions", "International business missions"],
+    "empty": "The events calendar is ready to be connected — announcements will appear here.",
+    "register": "Register"
+  },
+  "partners": {
+    "eyebrow": "Partners",
+    "title": "Trusted by",
+    "subtitle": "Banks, investors, universities and international organizations in the Association's network.",
+    "categories": ["Banks", "Investors", "Universities", "Law firms", "Consulting companies", "IT companies", "International organizations"]
+  },
+  "ai": {
+    "eyebrow": "AI Assistant",
+    "title": "The Association's digital consultant",
+    "subtitle": "This section is ready for OpenAI API integration and will help entrepreneurs get instant answers.",
+    "features": [
+      "Answering entrepreneurs' questions",
+      "Navigation across Association services",
+      "Finding government support measures",
+      "Matching the right department",
+      "Initial consultation",
+      "Analytical recommendations"
+    ],
+    "placeholder": "E.g.: which department can help with exporting my product?",
+    "send": "Send",
+    "disclaimer": "Demo mode. Once the OpenAI API is connected, the assistant will answer based on the Association's knowledge base.",
+    "demoReply": "Thank you for your question! Once the OpenAI API is connected, a detailed answer based on the Association's knowledge base will appear here. For now, we recommend visiting the \"Structure\" section to choose the right department."
+  },
+  "cabinet": {
+    "eyebrow": "Member Area",
+    "title": "Manage your membership online",
+    "subtitle": "Registration, membership payment, requests and documents — all in one place.",
+    "loginTab": "Sign in",
+    "registerTab": "Register",
+    "name": "Full name",
+    "email": "Email",
+    "phone": "Phone",
+    "password": "Password",
+    "submitLogin": "Sign in",
+    "submitRegister": "Create account",
+    "forgot": "Forgot your password?",
+    "features": ["Online membership payment", "Requests to departments", "Document storage", "Notifications", "Event registration", "Member profile"],
+    "welcomeBack": "Welcome back",
+    "demoNote": "Demo mode of the member area. Data is stored only in this browser.",
+    "logout": "Sign out"
+  },
+  "contacts": {
+    "eyebrow": "Contacts",
+    "title": "Get in touch with the Association",
+    "phoneLabel": "Phone",
+    "phoneValue": "+7 (700) 000-00-00",
+    "emailLabel": "Email",
+    "emailValue": "info@kz-entrepreneurs.kz",
+    "addressLabel": "Address",
+    "addressValue": "1201, Adilet Business Center, Mangilik El Ave., Astana, Kazakhstan",
+    "socialTitle": "Social media",
+    "formTitle": "Contact form",
+    "formName": "Your name",
+    "formEmail": "Email",
+    "formMessage": "Message",
+    "formSubmit": "Send message",
+    "formSuccess": "Thank you! Your message has been sent."
+  },
+  "footer": {
+    "aboutShort": "A national association uniting Kazakhstan's entrepreneurs to protect and develop business.",
+    "quickLinksTitle": "Navigation",
+    "departmentsTitle": "Departments",
+    "languagesTitle": "Site language",
+    "rights": "All rights reserved."
+  }
+}
