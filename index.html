@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="kk">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kazakhstan Entrepreneurs Association</title>
+<meta name="robots" content="index, follow" />
+<link rel="alternate" hreflang="kk" href="https://site.kz/kk/" />
+  <link rel="alternate" hreflang="ru" href="https://site.kz/ru/" />
+  <link rel="alternate" hreflang="en" href="https://site.kz/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://site.kz/kk/" />
+<script>
+(function(){
+  var supported = ["kk", "ru", "en"];
+  var saved = null;
+  try { saved = window.localStorage.getItem('kea_lang'); } catch(e) {}
+  var nav = (navigator.language || navigator.userLanguage || 'kk').toLowerCase();
+  var browserLang = nav.split('-')[0];
+  var target = (saved && supported.indexOf(saved) !== -1) ? saved
+             : (supported.indexOf(browserLang) !== -1 ? browserLang : 'kk');
+  window.location.replace('/' + target + '/');
+})();
+</script>
+</head>
+<body>
+  <noscript>
+    <p>Please choose a language / Тілді таңдаңыз / Выберите язык:</p>
+    <a href="/kk/">kk</a><a href="/ru/">ru</a><a href="/en/">en</a>
+  </noscript>
+</body>
+</html>
