@@ -167,7 +167,6 @@ p{margin:0;}
 .main-nav a:hover::after{right:0;}
 
 .header-actions{display:flex; align-items:center; gap:14px; flex:none;}
-header.site-header:has(~ .mobile-nav.open) .header-actions .lang-switch{visibility:hidden;}
 .lang-switch{display:flex; gap:2px; background:var(--glass-bg); border:1px solid var(--glass-border); border-radius:999px; padding:4px;}
 .lang-switch a{
   padding:6px 11px; border-radius:999px; font-size:12px; font-weight:700; letter-spacing:.04em;
@@ -376,6 +375,9 @@ header.site-header:has(~ .mobile-nav.open) .header-actions .lang-switch{visibili
   position:relative; overflow:hidden;
 }
 #regions-map{width:100%; height:100%; background:transparent;}
+#regions-map .leaflet-tile-pane{
+  filter:invert(1) hue-rotate(180deg) brightness(0.95) contrast(0.9) saturate(0.6);
+}
 .map-pin-icon{display:flex; align-items:center; justify-content:center;}
 .map-pin-dot{
   position:relative; display:block; width:10px; height:10px; border-radius:50%;

@@ -151,7 +151,6 @@ def render_page(lang):
 <div class="mobile-nav">
   {mobile_nav}
   <a href="#cabinet" class="btn btn-gold" style="margin-top:8px;">{e(d['topbar']['join'])}</a>
-  {lang_switch_html(lang, mobile=True)}
 </div>
 """
 
