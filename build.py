@@ -425,7 +425,7 @@ def render_page(lang):
     stats_section = f"""
 <section class="stats-strip">
   <div class="container">
-    <div class="grid grid-4" style="grid-template-columns:repeat(6,1fr); gap:18px;">{stats_html}</div>
+    <div class="grid stats-grid">{stats_html}</div>
   </div>
 </section>
 """
@@ -566,7 +566,7 @@ def render_page(lang):
       <h2>{e(d['partners']['title'])}</h2>
       <p class="lead" style="margin:14px auto 0;">{e(d['partners']['subtitle'])}</p>
     </div>
-    <div class="grid grid-4 stagger" style="grid-template-columns:repeat(7,1fr);">{partner_tags}</div>
+    <div class="grid partners-grid stagger">{partner_tags}</div>
   </div>
 </section>
 """
