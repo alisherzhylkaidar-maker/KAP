@@ -87,12 +87,34 @@ def nav_link_html(href, label, extra_class=""):
 
 
 def build_header_chrome(lang, d):
-    """Header + mobile nav + quick-actions + persistent AI widget bubble.
+    """Header + mobile drawer + persistent AI widget bubble.
     Identical on every page (home, news, events, ...) so the person is always
-    one click away from any section, the member area, and the AI assistant."""
+    one click away from any section, the member area, and the AI assistant.
+
+    Layout: brand (left) — News/Events as plain centered links (always visible,
+    middle) — language switch + member-area icon + hamburger (right).
+    The hamburger drawer only holds the remaining secondary sections
+    (About, Structure, Membership, Regions, Partners, Contacts); News, Events,
+    the AI assistant and the member area each already have their own direct,
+    always-visible entry point, so duplicating them in the drawer would be
+    redundant clutter.
+    """
     nav_links = get_nav_links(lang, d)
-    main_nav = "".join(nav_link_html(href, label) for href, label in nav_links)
-    mobile_nav = "".join(nav_link_html(href, label) for href, label in nav_links)
+    drawer_hrefs_to_skip = {"#ai", "#cabinet", f"/{lang}/news/", f"/{lang}/events/"}
+    drawer_links = [(href, label) for href, label in nav_links if href not in drawer_hrefs_to_skip]
+    mobile_nav = "".join(nav_link_html(href, label) for href, label in drawer_links)
+
+    center_nav = (
+        f'<a href="/{lang}/news/">{e(d["nav"]["news"])}</a>'
+        f'<a href="/{lang}/events/">{e(d["nav"]["events"])}</a>'
+    )
+
+    cabinet_icon = (
+        '<svg viewBox="0 0 24 24" fill="none">'
+        '<circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="1.6"/>'
+        '<path d="M4.5 20c0-3.9 3.3-6.6 7.5-6.6s7.5 2.7 7.5 6.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>'
+        '</svg>'
+    )
 
     return f"""
 <header class="site-header">
@@ -101,10 +123,10 @@ def build_header_chrome(lang, d):
       <span class="brand-mark">KEA</span>
       <span class="brand-text"><strong>Kazakhstan Entrepreneurs</strong><span>Association</span></span>
     </a>
-    <nav class="main-nav">{main_nav}</nav>
+    <nav class="center-nav">{center_nav}</nav>
     <div class="header-actions">
       {lang_switch_html(lang)}
-      <button type="button" class="btn btn-gold btn-sm" data-modal-trigger="cabinet">{e(d['topbar']['join'])}</button>
+      <button type="button" class="cabinet-icon-btn" data-modal-trigger="cabinet" aria-label="{e(d['nav']['cabinet'])}" title="{e(d['nav']['cabinet'])}">{cabinet_icon}</button>
       <button class="burger" aria-label="menu"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -114,12 +136,6 @@ def build_header_chrome(lang, d):
     {mobile_nav}
     <button type="button" class="btn btn-gold" style="margin-top:18px;" data-modal-trigger="cabinet">{e(d['topbar']['join'])}</button>
   </div>
-</div>
-<div class="quick-actions">
-  <button type="button" class="quick-btn" data-modal-trigger="cabinet" title="{e(d['nav']['cabinet'])}">
-    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.5"/><path d="M5 20c0-3.6 3.1-6.2 7-6.2s7 2.6 7 6.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    <span>{e(d['nav']['cabinet'])}</span>
-  </button>
 </div>
 """
 

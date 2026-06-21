@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<link rel="stylesheet" href="/css/style.css?v=1782031699" />
+<link rel="stylesheet" href="/css/style.css?v=1782032850" />
 <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Kazakhstan Entrepreneurs Association", "alternateName": "Қазақстан Кәсіпкерлер Қауымдастығы — бизнестің ұлттық бірлестігі", "url": "https://site.kz/kk/", "logo": "https://site.kz/assets/logo.png", "description": "Қазақстан Кәсіпкерлер Қауымдастығы елдің бизнесін біріктіреді, кәсіпкерлердің мүддесін қорғайды және Қазақстанның іскерлік ортасын дамытады.", "contactPoint": {"@type": "ContactPoint", "telephone": "+7 (700) 000-00-00", "email": "info@kz-entrepreneurs.kz", "contactType": "customer service"}, "address": {"@type": "PostalAddress", "addressLocality": "Astana", "addressCountry": "KZ", "streetAddress": "Астана қ., Мәңгілік Ел даңғылы, «Әділет» бизнес-орталығы, 1201-офис"}}</script>
 </head>
@@ -37,25 +37,19 @@
       <span class="brand-mark">KEA</span>
       <span class="brand-text"><strong>Kazakhstan Entrepreneurs</strong><span>Association</span></span>
     </a>
-    <nav class="main-nav"><a href="#about" class="">Біз туралы</a><a href="#structure" class="">Құрылым</a><a href="#membership" class="">Мүшелік</a><a href="#regions" class="">Аймақтар</a><a href="/kk/news/" class="">Жаңалықтар</a><a href="/kk/events/" class="">Іс-шаралар</a><a href="#partners" class="">Әріптестер</a><button type="button" class="nav-link-btn" data-modal-trigger="ai">AI-көмекші</button><button type="button" class="nav-link-btn" data-modal-trigger="cabinet">Жеке кабинет</button><a href="#contacts" class="">Байланыс</a></nav>
+    <nav class="center-nav"><a href="/kk/news/">Жаңалықтар</a><a href="/kk/events/">Іс-шаралар</a></nav>
     <div class="header-actions">
       <div class="lang-switch"><a href="/kk/" data-lang-link="kk" class="active">ҚАЗ</a><a href="/ru/" data-lang-link="ru" class="">РУС</a><a href="/en/" data-lang-link="en" class="">ENG</a></div>
-      <button type="button" class="btn btn-gold btn-sm" data-modal-trigger="cabinet">Қосылу</button>
+      <button type="button" class="cabinet-icon-btn" data-modal-trigger="cabinet" aria-label="Жеке кабинет" title="Жеке кабинет"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 20c0-3.9 3.3-6.6 7.5-6.6s7.5 2.7 7.5 6.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
       <button class="burger" aria-label="menu"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
 <div class="mobile-nav">
   <div class="mobile-nav-inner">
-    <a href="#about" class="">Біз туралы</a><a href="#structure" class="">Құрылым</a><a href="#membership" class="">Мүшелік</a><a href="#regions" class="">Аймақтар</a><a href="/kk/news/" class="">Жаңалықтар</a><a href="/kk/events/" class="">Іс-шаралар</a><a href="#partners" class="">Әріптестер</a><button type="button" class="nav-link-btn" data-modal-trigger="ai">AI-көмекші</button><button type="button" class="nav-link-btn" data-modal-trigger="cabinet">Жеке кабинет</button><a href="#contacts" class="">Байланыс</a>
+    <a href="#about" class="">Біз туралы</a><a href="#structure" class="">Құрылым</a><a href="#membership" class="">Мүшелік</a><a href="#regions" class="">Аймақтар</a><a href="#partners" class="">Әріптестер</a><a href="#contacts" class="">Байланыс</a>
     <button type="button" class="btn btn-gold" style="margin-top:18px;" data-modal-trigger="cabinet">Қосылу</button>
   </div>
-</div>
-<div class="quick-actions">
-  <button type="button" class="quick-btn" data-modal-trigger="cabinet" title="Жеке кабинет">
-    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.5"/><path d="M5 20c0-3.6 3.1-6.2 7-6.2s7 2.6 7 6.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    <span>Жеке кабинет</span>
-  </button>
 </div>
 
 <section class="page-hero">
@@ -168,6 +162,6 @@
 
 <div class="toast" id="toast"></div>
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-<script defer src="/js/main.js?v=1782031699"></script>
+<script defer src="/js/main.js?v=1782032850"></script>
 </body>
 </html>
