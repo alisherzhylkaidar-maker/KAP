@@ -282,7 +282,10 @@
     "subtitle": "Follow the changes that affect business in Kazakhstan.",
     "categories": ["Legislation", "Business", "Economy", "Investment", "Export", "Association news"],
     "empty": "The news section is ready to be connected — materials will be published here.",
-    "readMore": "Read more"
+    "readMore": "Read more",
+    "viewAll": "View all news",
+    "pageTitle": "All news",
+    "backHome": "Back to home"
   },
   "events": {
     "eyebrow": "Events",
@@ -290,7 +293,10 @@
     "subtitle": "Forums, conferences and business missions for Association members.",
     "types": ["Forums", "Conferences", "Round tables", "Business breakfasts", "Exhibitions", "International business missions"],
     "empty": "The events calendar is ready to be connected — announcements will appear here.",
-    "register": "Register"
+    "register": "Register",
+    "viewAll": "View all events",
+    "pageTitle": "All events",
+    "backHome": "Back to home"
   },
   "partners": {
     "eyebrow": "Partners",

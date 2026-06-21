@@ -19,9 +19,12 @@
   var burger = document.querySelector('.burger');
   var mobileNav = document.querySelector('.mobile-nav');
   if(burger && mobileNav){
-    burger.addEventListener('click', function(){ mobileNav.classList.toggle('open'); });
+    burger.addEventListener('click', function(){
+      mobileNav.classList.toggle('open');
+      burger.classList.toggle('active');
+    });
     mobileNav.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', function(){ mobileNav.classList.remove('open'); });
+      a.addEventListener('click', function(){ mobileNav.classList.remove('open'); burger.classList.remove('active'); });
     });
   }
 
@@ -105,6 +108,34 @@
     if(e.key === 'Escape'){
       document.querySelectorAll('.modal-overlay.open').forEach(closeModal);
     }
+  });
+
+  /* ---------- AI assistant widget (persistent corner chat bubble) ---------- */
+  var aiWidget = document.getElementById('ai-widget');
+  var aiBubble = document.getElementById('ai-widget-bubble');
+  var aiClose = document.querySelector('.ai-widget-close');
+  function openAiWidget(){ if(aiWidget){ aiWidget.classList.add('open'); } }
+  function closeAiWidget(){ if(aiWidget){ aiWidget.classList.remove('open'); } }
+  if(aiBubble && aiWidget){
+    aiBubble.addEventListener('click', function(){ aiWidget.classList.toggle('open'); });
+  }
+  if(aiClose){
+    aiClose.addEventListener('click', function(e){ e.stopPropagation(); closeAiWidget(); });
+  }
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){ closeAiWidget(); }
+  });
+
+  /* ---------- Generic modal triggers (member area, quick-action buttons, nav items) ---------- */
+  document.querySelectorAll('[data-modal-trigger]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var id = btn.getAttribute('data-modal-trigger');
+      if(mobileNav){ mobileNav.classList.remove('open'); }
+      if(burger){ burger.classList.remove('active'); }
+      if(id === 'ai'){ openAiWidget(); return; }
+      var modal = document.getElementById('modal-' + id);
+      if(modal){ openModal(modal); }
+    });
   });
 
   /* ---------- Generic toast ---------- */

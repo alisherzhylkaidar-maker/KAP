@@ -60,11 +60,196 @@ def footer_lang_html(current_lang):
     return "".join(items)
 
 
-def render_page(lang):
-    d = load(lang)
-    other = [l for l in LANGS if l != lang]
+def get_nav_links(lang, d):
+    """Single source of truth for the main navigation, used on every page."""
+    return [
+        ("#about", d["nav"]["about"]),
+        ("#structure", d["nav"]["structure"]),
+        ("#membership", d["nav"]["membership"]),
+        ("#regions", d["nav"]["regions"]),
+        (f"/{lang}/news/", d["nav"]["news"]),
+        (f"/{lang}/events/", d["nav"]["events"]),
+        ("#partners", d["nav"]["partners"]),
+        ("#ai", d["nav"]["ai"]),
+        ("#cabinet", d["nav"]["cabinet"]),
+        ("#contacts", d["nav"]["contacts"]),
+    ]
 
-    # ---------- HEAD ----------
+
+MODAL_HREFS = {"#ai": "ai", "#cabinet": "cabinet"}
+
+
+def nav_link_html(href, label, extra_class=""):
+    if href in MODAL_HREFS:
+        cls = ("nav-link-btn " + extra_class).strip()
+        return f'<button type="button" class="{cls}" data-modal-trigger="{MODAL_HREFS[href]}">{e(label)}</button>'
+    return f'<a href="{href}" class="{extra_class}">{e(label)}</a>'
+
+
+def build_header_chrome(lang, d):
+    """Header + mobile nav + quick-actions + persistent AI widget bubble.
+    Identical on every page (home, news, events, ...) so the person is always
+    one click away from any section, the member area, and the AI assistant."""
+    nav_links = get_nav_links(lang, d)
+    main_nav = "".join(nav_link_html(href, label) for href, label in nav_links)
+    mobile_nav = "".join(nav_link_html(href, label) for href, label in nav_links)
+
+    return f"""
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/{lang}/" class="brand">
+      <span class="brand-mark">KEA</span>
+      <span class="brand-text"><strong>Kazakhstan Entrepreneurs</strong><span>Association</span></span>
+    </a>
+    <nav class="main-nav">{main_nav}</nav>
+    <div class="header-actions">
+      {lang_switch_html(lang)}
+      <button type="button" class="btn btn-gold btn-sm" data-modal-trigger="cabinet">{e(d['topbar']['join'])}</button>
+      <button class="burger" aria-label="menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="mobile-nav">
+  <div class="mobile-nav-inner">
+    {mobile_nav}
+    <button type="button" class="btn btn-gold" style="margin-top:18px;" data-modal-trigger="cabinet">{e(d['topbar']['join'])}</button>
+  </div>
+</div>
+<div class="quick-actions">
+  <button type="button" class="quick-btn" data-modal-trigger="cabinet" title="{e(d['nav']['cabinet'])}">
+    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.5"/><path d="M5 20c0-3.6 3.1-6.2 7-6.2s7 2.6 7 6.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <span>{e(d['nav']['cabinet'])}</span>
+  </button>
+</div>
+"""
+
+
+def build_ai_widget(d):
+    """Persistent bottom-right AI assistant chat bubble. Same on every page."""
+    return f"""
+<div class="ai-widget" id="ai-widget">
+  <div class="ai-widget-panel" id="ai-widget-panel">
+    <div class="ai-widget-head">
+      <span class="dot-live"></span>
+      <strong>{e(d['ai']['eyebrow'])}</strong>
+      <button type="button" class="ai-widget-close" aria-label="close">&times;</button>
+    </div>
+    <div class="chat-body" id="ai-chat-body">
+      <div class="chat-bubble bot">{e(d['ai']['demoReply'])}</div>
+    </div>
+    <form id="ai-chat-form" class="chat-input-row" data-demo-reply="{e(d['ai']['demoReply'])}">
+      <input id="ai-chat-input" type="text" placeholder="{e(d['ai']['placeholder'])}" autocomplete="off" />
+      <button type="submit" class="btn btn-gold btn-sm">{e(d['ai']['send'])}</button>
+    </form>
+    <div class="ai-disclaimer">{e(d['ai']['disclaimer'])}</div>
+  </div>
+  <button type="button" class="ai-widget-bubble" id="ai-widget-bubble" aria-label="AI assistant">
+    <svg class="ico-chat" viewBox="0 0 24 24" fill="none"><path d="M4 12c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8c-1.1 0-2.1-.2-3-.6L4 20l1-4.3C4.4 14.6 4 13.3 4 12Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="8.6" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="15.4" cy="12" r="1" fill="currentColor"/></svg>
+    <svg class="ico-close" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+  </button>
+</div>
+"""
+
+
+def build_cabinet_modal(d):
+    """Member-area modal (login/register/dashboard). Same on every page."""
+    cab = d["cabinet"]
+    features_grid = "".join(f'<div class="glass card" style="padding:18px;"><p>{e(f)}</p></div>' for f in cab["features"])
+    return f"""
+<div class="modal-overlay" id="modal-cabinet">
+  <div class="modal glass modal-lg">
+    <button class="modal-close" aria-label="close">&times;</button>
+    <div class="cabinet-wrap">
+      <div class="glass auth-panel" id="cabinet-auth" style="padding:30px;">
+        <div id="cabinet-forms">
+          <div class="auth-tabs">
+            <button class="auth-tab active" data-tab="login">{e(cab['loginTab'])}</button>
+            <button class="auth-tab" data-tab="register">{e(cab['registerTab'])}</button>
+          </div>
+          <form id="login-form" style="display:flex; flex-direction:column;">
+            <div class="field"><label>{e(cab['email'])}</label><input type="email" required /></div>
+            <div class="field"><label>{e(cab['password'])}</label><input type="password" required /></div>
+            <a href="#" class="auth-forgot">{e(cab['forgot'])}</a>
+            <button type="submit" class="btn btn-gold btn-block">{e(cab['submitLogin'])}</button>
+          </form>
+          <form id="register-form" style="display:none; flex-direction:column;">
+            <div class="field"><label>{e(cab['name'])}</label><input type="text" name="name" required /></div>
+            <div class="field"><label>{e(cab['email'])}</label><input type="email" required /></div>
+            <div class="field"><label>{e(cab['phone'])}</label><input type="tel" required /></div>
+            <div class="field"><label>{e(cab['password'])}</label><input type="password" required /></div>
+            <button type="submit" class="btn btn-gold btn-block">{e(cab['submitRegister'])}</button>
+          </form>
+          <p class="cabinet-demo-note">{e(cab['demoNote'])}</p>
+        </div>
+        <div class="dashboard" id="cabinet-dashboard">
+          <div class="dashboard-head">
+            <h3>{e(cab['welcomeBack'])}, <span id="cabinet-username">Member</span></h3>
+            <button class="btn btn-ghost btn-sm" id="cabinet-logout">{e(cab.get('logout','Sign out'))}</button>
+          </div>
+          <p class="lead">{e(cab['subtitle'])}</p>
+          <p class="cabinet-demo-note">{e(cab['demoNote'])}</p>
+        </div>
+      </div>
+      <div>
+        <div class="eyebrow">{e(cab['eyebrow'])}</div>
+        <h2 style="font-size:28px;">{e(cab['title'])}</h2>
+        <p class="lead" style="margin:14px 0 22px; font-size:15px;">{e(cab['subtitle'])}</p>
+        <div class="grid cabinet-feature-grid">{features_grid}</div>
+      </div>
+    </div>
+  </div>
+</div>
+"""
+
+
+def build_footer(lang, d, nav_links):
+    dept_footer_links = "".join(f'<li>{e(dep["name"])}</li>' for dep in d["departments"][:6])
+    nav_footer_links = "".join(f'<li><a href="{href}">{e(label)}</a></li>' for href, label in nav_links[:6])
+    return f"""
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom:14px;"><span class="brand-mark">KEA</span><span class="brand-text"><strong>Kazakhstan Entrepreneurs</strong><span>Association</span></span></div>
+        <p style="color:var(--c-muted); font-size:14px; max-width:300px;">{e(d['footer']['aboutShort'])}</p>
+      </div>
+      <div>
+        <h4>{e(d['footer']['quickLinksTitle'])}</h4>
+        <ul>{nav_footer_links}</ul>
+      </div>
+      <div>
+        <h4>{e(d['footer']['departmentsTitle'])}</h4>
+        <ul>{dept_footer_links}</ul>
+      </div>
+      <div>
+        <h4>{e(d['footer']['languagesTitle'])}</h4>
+        <div class="footer-lang">{footer_lang_html(lang)}</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="year"></span> Kazakhstan Entrepreneurs Association. {e(d['footer']['rights'])}</span>
+      <span>{SITE_NAME}/{lang}</span>
+    </div>
+  </div>
+</footer>
+"""
+
+
+def build_scripts():
+    return f"""
+<div class="toast" id="toast"></div>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script defer src="/js/main.js?v={BUILD_VERSION}"></script>
+</body>
+</html>
+"""
+
+
+def build_head(lang, d, url_path="", title=None, description=None):
+    """url_path is the slug after the language code, e.g. '' for home, 'news/' for the news page."""
+    page_url = f"{BASE_URL}/{lang}/{url_path}"
+    page_title = title or d["meta"]["title"]
+    page_desc = description or d["meta"]["description"]
     schema = {
         "@context": "https://schema.org",
         "@type": "Organization",
@@ -86,22 +271,25 @@ def render_page(lang):
             "streetAddress": d["contacts"]["addressValue"]
         }
     }
-
-    head = f"""<!doctype html>
+    hreflang = "\n  ".join(
+        [f'<link rel="alternate" hreflang="{l}" href="{BASE_URL}/{l}/{url_path}" />' for l in LANGS] +
+        [f'<link rel="alternate" hreflang="x-default" href="{BASE_URL}/{DEFAULT_LANG}/{url_path}" />']
+    )
+    return f"""<!doctype html>
 <html lang="{lang}" dir="{d.get('dir','ltr')}">
 <head>
 <script>document.documentElement.classList.add('js');</script>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>{e(d['meta']['title'])}</title>
-<meta name="description" content="{e(d['meta']['description'])}" />
-<link rel="canonical" href="{BASE_URL}/{lang}/" />
-{hreflang_tags(lang)}
+<title>{e(page_title)}</title>
+<meta name="description" content="{e(page_desc)}" />
+<link rel="canonical" href="{page_url}" />
+{hreflang}
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Kazakhstan Entrepreneurs Association" />
-<meta property="og:title" content="{e(d['meta']['title'])}" />
-<meta property="og:description" content="{e(d['meta']['description'])}" />
-<meta property="og:url" content="{BASE_URL}/{lang}/" />
+<meta property="og:title" content="{e(page_title)}" />
+<meta property="og:description" content="{e(page_desc)}" />
+<meta property="og:url" content="{page_url}" />
 <meta property="og:locale" content="{lang}" />
 <meta property="og:image" content="{BASE_URL}/assets/og-cover.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -118,42 +306,13 @@ def render_page(lang):
 <body>
 """
 
-    # ---------- HEADER ----------
-    nav_links = [
-        ("#about", d["nav"]["about"]),
-        ("#structure", d["nav"]["structure"]),
-        ("#membership", d["nav"]["membership"]),
-        ("#regions", d["nav"]["regions"]),
-        ("#news", d["nav"]["news"]),
-        ("#events", d["nav"]["events"]),
-        ("#partners", d["nav"]["partners"]),
-        ("#ai", d["nav"]["ai"]),
-        ("#cabinet", d["nav"]["cabinet"]),
-        ("#contacts", d["nav"]["contacts"]),
-    ]
-    main_nav = "".join(f'<a href="{href}">{e(label)}</a>' for href, label in nav_links)
-    mobile_nav = "".join(f'<a href="{href}">{e(label)}</a>' for href, label in nav_links)
 
-    header = f"""
-<header class="site-header">
-  <div class="container header-inner">
-    <a href="/{lang}/" class="brand">
-      <span class="brand-mark">KEA</span>
-      <span class="brand-text"><strong>Kazakhstan Entrepreneurs</strong><span>Association</span></span>
-    </a>
-    <nav class="main-nav">{main_nav}</nav>
-    <div class="header-actions">
-      {lang_switch_html(lang)}
-      <a href="#cabinet" class="btn btn-gold btn-sm">{e(d['topbar']['join'])}</a>
-    </div>
-    <button class="burger" aria-label="menu"><span></span><span></span><span></span></button>
-  </div>
-</header>
-<div class="mobile-nav">
-  {mobile_nav}
-  <a href="#cabinet" class="btn btn-gold" style="margin-top:8px;">{e(d['topbar']['join'])}</a>
-</div>
-"""
+def render_page(lang):
+    d = load(lang)
+    nav_links = get_nav_links(lang, d)
+
+    head = build_head(lang, d, url_path="")
+    header = build_header_chrome(lang, d)
 
     # ---------- HERO ----------
     hero = f"""
@@ -166,7 +325,7 @@ def render_page(lang):
     <div class="hero-ctas">
       <a href="#membership" class="btn btn-gold">{e(d['hero']['cta1'])}</a>
       <a href="#contacts" class="btn btn-ghost">{e(d['hero']['cta2'])}</a>
-      <a href="#cabinet" class="btn btn-ghost">{e(d['hero']['cta3'])}</a>
+      <button type="button" class="btn btn-ghost" data-modal-trigger="cabinet">{e(d['hero']['cta3'])}</button>
       <a href="#contacts" class="btn btn-ghost">{e(d['hero']['cta4'])}</a>
     </div>
   </div>
@@ -381,38 +540,6 @@ def render_page(lang):
 </section>
 """
 
-    # ---------- NEWS ----------
-    news_tabs = "".join(f'<button class="tab-pill">{e(c)}</button>' for c in d["news"]["categories"])
-    news_section = f"""
-<section class="section" id="news">
-  <div class="container">
-    <div class="section-head">
-      <div class="eyebrow">{e(d['news']['eyebrow'])}</div>
-      <h2>{e(d['news']['title'])}</h2>
-      <p class="lead" style="margin-top:14px;">{e(d['news']['subtitle'])}</p>
-    </div>
-    <div class="tabs-row">{news_tabs}</div>
-    <div class="empty-panel">{e(d['news']['empty'])}</div>
-  </div>
-</section>
-"""
-
-    # ---------- EVENTS ----------
-    event_tabs = "".join(f'<button class="tab-pill">{e(c)}</button>' for c in d["events"]["types"])
-    events_section = f"""
-<section class="section section-tight" id="events">
-  <div class="container">
-    <div class="section-head">
-      <div class="eyebrow">{e(d['events']['eyebrow'])}</div>
-      <h2>{e(d['events']['title'])}</h2>
-      <p class="lead" style="margin-top:14px;">{e(d['events']['subtitle'])}</p>
-    </div>
-    <div class="tabs-row">{event_tabs}</div>
-    <div class="empty-panel">{e(d['events']['empty'])}</div>
-  </div>
-</section>
-"""
-
     # ---------- PARTNERS ----------
     partner_tags = "".join(f'<div class="glass partner-tag reveal">{e(c)}</div>' for c in d["partners"]["categories"])
     partners_section = f"""
@@ -428,78 +555,9 @@ def render_page(lang):
 </section>
 """
 
-    # ---------- AI ASSISTANT ----------
-    ai_features = "".join(f'<div class="ai-feature"><span class="dot"></span>{e(f)}</div>' for f in d["ai"]["features"])
-    ai_section = f"""
-<section class="section" id="ai">
-  <div class="container ai-wrap">
-    <div class="reveal">
-      <div class="eyebrow">{e(d['ai']['eyebrow'])}</div>
-      <h2>{e(d['ai']['title'])}</h2>
-      <p class="lead" style="margin:16px 0 26px;">{e(d['ai']['subtitle'])}</p>
-      {ai_features}
-    </div>
-    <div class="glass chat-panel reveal">
-      <div class="chat-head"><span class="dot-live"></span><strong>AI Assistant</strong></div>
-      <div class="chat-body" id="ai-chat-body">
-        <div class="chat-bubble bot">{e(d['ai']['demoReply'])}</div>
-      </div>
-      <form id="ai-chat-form" class="chat-input-row" data-demo-reply="{e(d['ai']['demoReply'])}">
-        <input id="ai-chat-input" type="text" placeholder="{e(d['ai']['placeholder'])}" autocomplete="off" />
-        <button type="submit" class="btn btn-gold btn-sm">{e(d['ai']['send'])}</button>
-      </form>
-      <div class="ai-disclaimer">{e(d['ai']['disclaimer'])}</div>
-    </div>
-  </div>
-</section>
-"""
-
-    # ---------- CABINET ----------
-    cab = d["cabinet"]
-    features_grid = "".join(f'<div class="glass card" style="padding:20px;"><p>{e(f)}</p></div>' for f in cab["features"])
-    cabinet_section = f"""
-<section class="section section-tight" id="cabinet">
-  <div class="container cabinet-wrap">
-    <div class="glass auth-panel reveal" id="cabinet-auth">
-      <div id="cabinet-forms">
-        <div class="auth-tabs">
-          <button class="auth-tab active" data-tab="login">{e(cab['loginTab'])}</button>
-          <button class="auth-tab" data-tab="register">{e(cab['registerTab'])}</button>
-        </div>
-        <form id="login-form" style="display:flex; flex-direction:column;">
-          <div class="field"><label>{e(cab['email'])}</label><input type="email" required /></div>
-          <div class="field"><label>{e(cab['password'])}</label><input type="password" required /></div>
-          <a href="#" class="auth-forgot">{e(cab['forgot'])}</a>
-          <button type="submit" class="btn btn-gold btn-block">{e(cab['submitLogin'])}</button>
-        </form>
-        <form id="register-form" style="display:none; flex-direction:column;">
-          <div class="field"><label>{e(cab['name'])}</label><input type="text" name="name" required /></div>
-          <div class="field"><label>{e(cab['email'])}</label><input type="email" required /></div>
-          <div class="field"><label>{e(cab['phone'])}</label><input type="tel" required /></div>
-          <div class="field"><label>{e(cab['password'])}</label><input type="password" required /></div>
-          <button type="submit" class="btn btn-gold btn-block">{e(cab['submitRegister'])}</button>
-        </form>
-        <p class="cabinet-demo-note">{e(cab['demoNote'])}</p>
-      </div>
-
-      <div class="dashboard" id="cabinet-dashboard">
-        <div class="dashboard-head">
-          <h3>{e(cab['welcomeBack'])}, <span id="cabinet-username">Member</span></h3>
-          <button class="btn btn-ghost btn-sm" id="cabinet-logout">{e(cab.get('logout','Sign out'))}</button>
-        </div>
-        <p class="lead">{e(cab['subtitle'])}</p>
-        <p class="cabinet-demo-note">{e(cab['demoNote'])}</p>
-      </div>
-    </div>
-    <div class="reveal">
-      <div class="eyebrow">{e(cab['eyebrow'])}</div>
-      <h2>{e(cab['title'])}</h2>
-      <p class="lead" style="margin:16px 0 28px;">{e(cab['subtitle'])}</p>
-      <div class="grid cabinet-feature-grid">{features_grid}</div>
-    </div>
-  </div>
-</section>
-"""
+    # ---------- AI ASSISTANT + CABINET (shared widgets, same on every page) ----------
+    ai_section = build_ai_widget(d)
+    cabinet_section = build_cabinet_modal(d)
 
     # ---------- CONTACTS ----------
     ct = d["contacts"]
@@ -533,52 +591,66 @@ def render_page(lang):
 </section>
 """
 
-    # ---------- FOOTER ----------
-    dept_footer_links = "".join(f'<li>{e(dep["name"])}</li>' for dep in d["departments"][:6])
-    nav_footer_links = "".join(f'<li><a href="{href}">{e(label)}</a></li>' for href, label in nav_links[:6])
-    footer = f"""
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <div class="brand" style="margin-bottom:14px;"><span class="brand-mark">KEA</span><span class="brand-text"><strong>Kazakhstan Entrepreneurs</strong><span>Association</span></span></div>
-        <p style="color:var(--c-muted); font-size:14px; max-width:300px;">{e(d['footer']['aboutShort'])}</p>
-      </div>
-      <div>
-        <h4>{e(d['footer']['quickLinksTitle'])}</h4>
-        <ul>{nav_footer_links}</ul>
-      </div>
-      <div>
-        <h4>{e(d['footer']['departmentsTitle'])}</h4>
-        <ul>{dept_footer_links}</ul>
-      </div>
-      <div>
-        <h4>{e(d['footer']['languagesTitle'])}</h4>
-        <div class="footer-lang">{footer_lang_html(lang)}</div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>&copy; <span id="year"></span> Kazakhstan Entrepreneurs Association. {e(d['footer']['rights'])}</span>
-      <span>{SITE_NAME}/{lang}</span>
-    </div>
-  </div>
-</footer>
-"""
-
-    toast_and_scripts = f"""
-<div class="toast" id="toast"></div>
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-<script defer src="/js/main.js?v={BUILD_VERSION}"></script>
-</body>
-</html>
-"""
+    # ---------- FOOTER + SCRIPTS ----------
+    footer = build_footer(lang, d, nav_links)
+    toast_and_scripts = build_scripts()
 
     return (
         head + header + hero + about_section + mission + values_section + directions_section +
         stats_section + structure_section + practical_section + membership_section +
-        regions_section + news_section + events_section + partners_section + ai_section +
+        regions_section + partners_section + ai_section +
         cabinet_section + contacts_section + footer + toast_and_scripts
     )
+
+
+def render_listing_page(lang, section_key, types_key):
+    """Shared renderer for the dedicated News and Events pages — same chrome
+    (header, AI widget, member-area modal, footer) as the homepage, full-width
+    content area instead of a teaser, with category tabs and an empty state
+    ready for real content."""
+    d = load(lang)
+    nav_links = get_nav_links(lang, d)
+    sec = d[section_key]
+
+    head = build_head(
+        lang, d, url_path=f"{section_key}/",
+        title=f"{sec.get('pageTitle', sec['title'])} — Kazakhstan Entrepreneurs Association",
+        description=sec["subtitle"]
+    )
+    header = build_header_chrome(lang, d)
+
+    tabs = "".join(f'<button class="tab-pill">{e(c)}</button>' for c in sec[types_key])
+    page_body = f"""
+<section class="page-hero">
+  <div class="container">
+    <a href="/{lang}/" class="back-link">&larr; {e(sec.get('backHome', 'Home'))}</a>
+    <div class="eyebrow">{e(sec['eyebrow'])}</div>
+    <h1>{e(sec.get('pageTitle', sec['title']))}</h1>
+    <p class="lead" style="margin-top:16px; max-width:640px;">{e(sec['subtitle'])}</p>
+  </div>
+</section>
+<section class="section section-tight">
+  <div class="container">
+    <div class="tabs-row">{tabs}</div>
+    <div class="empty-panel">{e(sec['empty'])}</div>
+  </div>
+</section>
+"""
+
+    ai_widget = build_ai_widget(d)
+    cabinet_modal = build_cabinet_modal(d)
+    footer = build_footer(lang, d, nav_links)
+    scripts = build_scripts()
+
+    return head + header + page_body + ai_widget + cabinet_modal + footer + scripts
+
+
+def render_news_page(lang):
+    return render_listing_page(lang, "news", "categories")
+
+
+def render_events_page(lang):
+    return render_listing_page(lang, "events", "types")
 
 
 def render_root_redirect():
@@ -617,12 +689,18 @@ def render_root_redirect():
 
 def render_sitemap():
     urls = []
-    for l in LANGS:
-        urls.append(f"""  <url>
-    <loc>{BASE_URL}/{l}/</loc>
-    {''.join(f'<xhtml:link rel="alternate" hreflang="{ol}" href="{BASE_URL}/{ol}/" />' for ol in LANGS)}
+    sub_pages = ["", "news/", "events/"]
+    for sub in sub_pages:
+        for l in LANGS:
+            if sub == "":
+                priority = "1.0" if l == DEFAULT_LANG else "0.9"
+            else:
+                priority = "0.7"
+            urls.append(f"""  <url>
+    <loc>{BASE_URL}/{l}/{sub}</loc>
+    {''.join(f'<xhtml:link rel="alternate" hreflang="{ol}" href="{BASE_URL}/{ol}/{sub}" />' for ol in LANGS)}
     <changefreq>weekly</changefreq>
-    <priority>{'1.0' if l == DEFAULT_LANG else '0.9'}</priority>
+    <priority>{priority}</priority>
   </url>""")
     return f"""<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -648,6 +726,20 @@ def main():
         with open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8") as f:
             f.write(html_out)
         print(f"built /{lang}/index.html  ({len(html_out)} chars)")
+
+        news_dir = os.path.join(out_dir, "news")
+        os.makedirs(news_dir, exist_ok=True)
+        news_html = render_news_page(lang)
+        with open(os.path.join(news_dir, "index.html"), "w", encoding="utf-8") as f:
+            f.write(news_html)
+        print(f"built /{lang}/news/index.html  ({len(news_html)} chars)")
+
+        events_dir = os.path.join(out_dir, "events")
+        os.makedirs(events_dir, exist_ok=True)
+        events_html = render_events_page(lang)
+        with open(os.path.join(events_dir, "index.html"), "w", encoding="utf-8") as f:
+            f.write(events_html)
+        print(f"built /{lang}/events/index.html  ({len(events_html)} chars)")
 
     with open(os.path.join(OUT_ROOT, "index.html"), "w", encoding="utf-8") as f:
         f.write(render_root_redirect())

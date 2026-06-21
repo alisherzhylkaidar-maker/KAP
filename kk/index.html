@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<link rel="stylesheet" href="/css/style.css?v=1782028825" />
+<link rel="stylesheet" href="/css/style.css?v=1782031699" />
 <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Kazakhstan Entrepreneurs Association", "alternateName": "Қазақстан Кәсіпкерлер Қауымдастығы — бизнестің ұлттық бірлестігі", "url": "https://site.kz/kk/", "logo": "https://site.kz/assets/logo.png", "description": "Қазақстан Кәсіпкерлер Қауымдастығы елдің бизнесін біріктіреді, кәсіпкерлердің мүддесін қорғайды және Қазақстанның іскерлік ортасын дамытады.", "contactPoint": {"@type": "ContactPoint", "telephone": "+7 (700) 000-00-00", "email": "info@kz-entrepreneurs.kz", "contactType": "customer service"}, "address": {"@type": "PostalAddress", "addressLocality": "Astana", "addressCountry": "KZ", "streetAddress": "Астана қ., Мәңгілік Ел даңғылы, «Әділет» бизнес-орталығы, 1201-офис"}}</script>
 </head>
@@ -37,17 +37,25 @@
       <span class="brand-mark">KEA</span>
       <span class="brand-text"><strong>Kazakhstan Entrepreneurs</strong><span>Association</span></span>
     </a>
-    <nav class="main-nav"><a href="#about">Біз туралы</a><a href="#structure">Құрылым</a><a href="#membership">Мүшелік</a><a href="#regions">Аймақтар</a><a href="#news">Жаңалықтар</a><a href="#events">Іс-шаралар</a><a href="#partners">Әріптестер</a><a href="#ai">AI-көмекші</a><a href="#cabinet">Жеке кабинет</a><a href="#contacts">Байланыс</a></nav>
+    <nav class="main-nav"><a href="#about" class="">Біз туралы</a><a href="#structure" class="">Құрылым</a><a href="#membership" class="">Мүшелік</a><a href="#regions" class="">Аймақтар</a><a href="/kk/news/" class="">Жаңалықтар</a><a href="/kk/events/" class="">Іс-шаралар</a><a href="#partners" class="">Әріптестер</a><button type="button" class="nav-link-btn" data-modal-trigger="ai">AI-көмекші</button><button type="button" class="nav-link-btn" data-modal-trigger="cabinet">Жеке кабинет</button><a href="#contacts" class="">Байланыс</a></nav>
     <div class="header-actions">
       <div class="lang-switch"><a href="/kk/" data-lang-link="kk" class="active">ҚАЗ</a><a href="/ru/" data-lang-link="ru" class="">РУС</a><a href="/en/" data-lang-link="en" class="">ENG</a></div>
-      <a href="#cabinet" class="btn btn-gold btn-sm">Қосылу</a>
+      <button type="button" class="btn btn-gold btn-sm" data-modal-trigger="cabinet">Қосылу</button>
+      <button class="burger" aria-label="menu"><span></span><span></span><span></span></button>
     </div>
-    <button class="burger" aria-label="menu"><span></span><span></span><span></span></button>
   </div>
 </header>
 <div class="mobile-nav">
-  <a href="#about">Біз туралы</a><a href="#structure">Құрылым</a><a href="#membership">Мүшелік</a><a href="#regions">Аймақтар</a><a href="#news">Жаңалықтар</a><a href="#events">Іс-шаралар</a><a href="#partners">Әріптестер</a><a href="#ai">AI-көмекші</a><a href="#cabinet">Жеке кабинет</a><a href="#contacts">Байланыс</a>
-  <a href="#cabinet" class="btn btn-gold" style="margin-top:8px;">Қосылу</a>
+  <div class="mobile-nav-inner">
+    <a href="#about" class="">Біз туралы</a><a href="#structure" class="">Құрылым</a><a href="#membership" class="">Мүшелік</a><a href="#regions" class="">Аймақтар</a><a href="/kk/news/" class="">Жаңалықтар</a><a href="/kk/events/" class="">Іс-шаралар</a><a href="#partners" class="">Әріптестер</a><button type="button" class="nav-link-btn" data-modal-trigger="ai">AI-көмекші</button><button type="button" class="nav-link-btn" data-modal-trigger="cabinet">Жеке кабинет</button><a href="#contacts" class="">Байланыс</a>
+    <button type="button" class="btn btn-gold" style="margin-top:18px;" data-modal-trigger="cabinet">Қосылу</button>
+  </div>
+</div>
+<div class="quick-actions">
+  <button type="button" class="quick-btn" data-modal-trigger="cabinet" title="Жеке кабинет">
+    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.5"/><path d="M5 20c0-3.6 3.1-6.2 7-6.2s7 2.6 7 6.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <span>Жеке кабинет</span>
+  </button>
 </div>
 
 <section class="hero">
@@ -59,7 +67,7 @@
     <div class="hero-ctas">
       <a href="#membership" class="btn btn-gold">Ассоциацияға қосылу</a>
       <a href="#contacts" class="btn btn-ghost">Кеңес алу</a>
-      <a href="#cabinet" class="btn btn-ghost">Мүше болу</a>
+      <button type="button" class="btn btn-ghost" data-modal-trigger="cabinet">Мүше болу</button>
       <a href="#contacts" class="btn btn-ghost">Байланысу</a>
     </div>
   </div>
@@ -624,30 +632,6 @@
   </div>
 </section>
 
-<section class="section" id="news">
-  <div class="container">
-    <div class="section-head">
-      <div class="eyebrow">Жаңалықтар</div>
-      <h2>Жаңалықтар мен аналитика</h2>
-      <p class="lead" style="margin-top:14px;">Қазақстандағы бизнеске әсер ететін өзгерістерді бақылаңыз.</p>
-    </div>
-    <div class="tabs-row"><button class="tab-pill">Заңнама</button><button class="tab-pill">Бизнес</button><button class="tab-pill">Экономика</button><button class="tab-pill">Инвестициялар</button><button class="tab-pill">Экспорт</button><button class="tab-pill">Қауымдастық жаңалықтары</button></div>
-    <div class="empty-panel">Жаңалықтар бөлімі қосылуға дайын — материалдар осында жарияланады.</div>
-  </div>
-</section>
-
-<section class="section section-tight" id="events">
-  <div class="container">
-    <div class="section-head">
-      <div class="eyebrow">Іс-шаралар</div>
-      <h2>Іскерлік іс-шаралар</h2>
-      <p class="lead" style="margin-top:14px;">Қауымдастық мүшелері үшін форумдар, конференциялар және бизнес-миссиялар.</p>
-    </div>
-    <div class="tabs-row"><button class="tab-pill">Форумдар</button><button class="tab-pill">Конференциялар</button><button class="tab-pill">Дөңгелек үстелдер</button><button class="tab-pill">Іскерлік таңғы асулар</button><button class="tab-pill">Көрмелер</button><button class="tab-pill">Халықаралық бизнес-миссиялар</button></div>
-    <div class="empty-panel">Іс-шаралар күнтізбесі қосылуға дайын — хабарландырулар осында пайда болады.</div>
-  </div>
-</section>
-
 <section class="section section-tight" id="partners">
   <div class="container">
     <div class="section-head center">
@@ -659,69 +643,71 @@
   </div>
 </section>
 
-<section class="section" id="ai">
-  <div class="container ai-wrap">
-    <div class="reveal">
-      <div class="eyebrow">AI-көмекші</div>
-      <h2>Қауымдастықтың цифрлық кеңесшісі</h2>
-      <p class="lead" style="margin:16px 0 26px;">Бөлім OpenAI API-мен интеграциялауға дайындалған және кәсіпкерлерге жауапты бірден алуға көмектеседі.</p>
-      <div class="ai-feature"><span class="dot"></span>Кәсіпкерлерге жауап беру</div><div class="ai-feature"><span class="dot"></span>Қауымдастық қызметтері бойынша бағдар беру</div><div class="ai-feature"><span class="dot"></span>Мемлекеттік қолдау шараларын табу</div><div class="ai-feature"><span class="dot"></span>Тиісті департаментті таңдау</div><div class="ai-feature"><span class="dot"></span>Алғашқы кеңес беру</div><div class="ai-feature"><span class="dot"></span>Аналитикалық ұсыныстар</div>
+<div class="ai-widget" id="ai-widget">
+  <div class="ai-widget-panel" id="ai-widget-panel">
+    <div class="ai-widget-head">
+      <span class="dot-live"></span>
+      <strong>AI-көмекші</strong>
+      <button type="button" class="ai-widget-close" aria-label="close">&times;</button>
     </div>
-    <div class="glass chat-panel reveal">
-      <div class="chat-head"><span class="dot-live"></span><strong>AI Assistant</strong></div>
-      <div class="chat-body" id="ai-chat-body">
-        <div class="chat-bubble bot">Сұрағыңыз үшін рахмет! OpenAI API қосылғаннан кейін мұнда Қауымдастықтың білім қорына негізделген толық жауап шығады. Әзірге «Құрылым» бөліміне өтіп, тиісті департаментті таңдауды ұсынамыз.</div>
+    <div class="chat-body" id="ai-chat-body">
+      <div class="chat-bubble bot">Сұрағыңыз үшін рахмет! OpenAI API қосылғаннан кейін мұнда Қауымдастықтың білім қорына негізделген толық жауап шығады. Әзірге «Құрылым» бөліміне өтіп, тиісті департаментті таңдауды ұсынамыз.</div>
+    </div>
+    <form id="ai-chat-form" class="chat-input-row" data-demo-reply="Сұрағыңыз үшін рахмет! OpenAI API қосылғаннан кейін мұнда Қауымдастықтың білім қорына негізделген толық жауап шығады. Әзірге «Құрылым» бөліміне өтіп, тиісті департаментті таңдауды ұсынамыз.">
+      <input id="ai-chat-input" type="text" placeholder="Мысалы: өнімді экспорттауға қай департамент көмектеседі?" autocomplete="off" />
+      <button type="submit" class="btn btn-gold btn-sm">Жіберу</button>
+    </form>
+    <div class="ai-disclaimer">Демонстрациялық режим. OpenAI API қосылғаннан кейін көмекші Қауымдастықтың дерекқоры негізінде жауап береді.</div>
+  </div>
+  <button type="button" class="ai-widget-bubble" id="ai-widget-bubble" aria-label="AI assistant">
+    <svg class="ico-chat" viewBox="0 0 24 24" fill="none"><path d="M4 12c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8c-1.1 0-2.1-.2-3-.6L4 20l1-4.3C4.4 14.6 4 13.3 4 12Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="8.6" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="15.4" cy="12" r="1" fill="currentColor"/></svg>
+    <svg class="ico-close" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+  </button>
+</div>
+
+<div class="modal-overlay" id="modal-cabinet">
+  <div class="modal glass modal-lg">
+    <button class="modal-close" aria-label="close">&times;</button>
+    <div class="cabinet-wrap">
+      <div class="glass auth-panel" id="cabinet-auth" style="padding:30px;">
+        <div id="cabinet-forms">
+          <div class="auth-tabs">
+            <button class="auth-tab active" data-tab="login">Кіру</button>
+            <button class="auth-tab" data-tab="register">Тіркелу</button>
+          </div>
+          <form id="login-form" style="display:flex; flex-direction:column;">
+            <div class="field"><label>Email</label><input type="email" required /></div>
+            <div class="field"><label>Құпия сөз</label><input type="password" required /></div>
+            <a href="#" class="auth-forgot">Құпия сөзді ұмыттыңыз ба?</a>
+            <button type="submit" class="btn btn-gold btn-block">Кіру</button>
+          </form>
+          <form id="register-form" style="display:none; flex-direction:column;">
+            <div class="field"><label>Аты-жөні</label><input type="text" name="name" required /></div>
+            <div class="field"><label>Email</label><input type="email" required /></div>
+            <div class="field"><label>Телефон</label><input type="tel" required /></div>
+            <div class="field"><label>Құпия сөз</label><input type="password" required /></div>
+            <button type="submit" class="btn btn-gold btn-block">Аккаунт құру</button>
+          </form>
+          <p class="cabinet-demo-note">Жеке кабинеттің демонстрациялық режимі. Деректер тек осы браузерде сақталады.</p>
+        </div>
+        <div class="dashboard" id="cabinet-dashboard">
+          <div class="dashboard-head">
+            <h3>Қайта келуіңізге қуаныштымыз, <span id="cabinet-username">Member</span></h3>
+            <button class="btn btn-ghost btn-sm" id="cabinet-logout">Шығу</button>
+          </div>
+          <p class="lead">Тіркелу, мүшелік ақысын төлеу, өтінімдер және құжаттар — бір жерде.</p>
+          <p class="cabinet-demo-note">Жеке кабинеттің демонстрациялық режимі. Деректер тек осы браузерде сақталады.</p>
+        </div>
       </div>
-      <form id="ai-chat-form" class="chat-input-row" data-demo-reply="Сұрағыңыз үшін рахмет! OpenAI API қосылғаннан кейін мұнда Қауымдастықтың білім қорына негізделген толық жауап шығады. Әзірге «Құрылым» бөліміне өтіп, тиісті департаментті таңдауды ұсынамыз.">
-        <input id="ai-chat-input" type="text" placeholder="Мысалы: өнімді экспорттауға қай департамент көмектеседі?" autocomplete="off" />
-        <button type="submit" class="btn btn-gold btn-sm">Жіберу</button>
-      </form>
-      <div class="ai-disclaimer">Демонстрациялық режим. OpenAI API қосылғаннан кейін көмекші Қауымдастықтың дерекқоры негізінде жауап береді.</div>
+      <div>
+        <div class="eyebrow">Жеке кабинет</div>
+        <h2 style="font-size:28px;">Қатысуды онлайн басқарыңыз</h2>
+        <p class="lead" style="margin:14px 0 22px; font-size:15px;">Тіркелу, мүшелік ақысын төлеу, өтінімдер және құжаттар — бір жерде.</p>
+        <div class="grid cabinet-feature-grid"><div class="glass card" style="padding:18px;"><p>Мүшелік ақысын онлайн төлеу</p></div><div class="glass card" style="padding:18px;"><p>Департаменттерге өтінімдер</p></div><div class="glass card" style="padding:18px;"><p>Құжаттарды сақтау</p></div><div class="glass card" style="padding:18px;"><p>Хабарландырулар</p></div><div class="glass card" style="padding:18px;"><p>Іс-шараларға тіркелу</p></div><div class="glass card" style="padding:18px;"><p>Мүше профилі</p></div></div>
+      </div>
     </div>
   </div>
-</section>
-
-<section class="section section-tight" id="cabinet">
-  <div class="container cabinet-wrap">
-    <div class="glass auth-panel reveal" id="cabinet-auth">
-      <div id="cabinet-forms">
-        <div class="auth-tabs">
-          <button class="auth-tab active" data-tab="login">Кіру</button>
-          <button class="auth-tab" data-tab="register">Тіркелу</button>
-        </div>
-        <form id="login-form" style="display:flex; flex-direction:column;">
-          <div class="field"><label>Email</label><input type="email" required /></div>
-          <div class="field"><label>Құпия сөз</label><input type="password" required /></div>
-          <a href="#" class="auth-forgot">Құпия сөзді ұмыттыңыз ба?</a>
-          <button type="submit" class="btn btn-gold btn-block">Кіру</button>
-        </form>
-        <form id="register-form" style="display:none; flex-direction:column;">
-          <div class="field"><label>Аты-жөні</label><input type="text" name="name" required /></div>
-          <div class="field"><label>Email</label><input type="email" required /></div>
-          <div class="field"><label>Телефон</label><input type="tel" required /></div>
-          <div class="field"><label>Құпия сөз</label><input type="password" required /></div>
-          <button type="submit" class="btn btn-gold btn-block">Аккаунт құру</button>
-        </form>
-        <p class="cabinet-demo-note">Жеке кабинеттің демонстрациялық режимі. Деректер тек осы браузерде сақталады.</p>
-      </div>
-
-      <div class="dashboard" id="cabinet-dashboard">
-        <div class="dashboard-head">
-          <h3>Қайта келуіңізге қуаныштымыз, <span id="cabinet-username">Member</span></h3>
-          <button class="btn btn-ghost btn-sm" id="cabinet-logout">Шығу</button>
-        </div>
-        <p class="lead">Тіркелу, мүшелік ақысын төлеу, өтінімдер және құжаттар — бір жерде.</p>
-        <p class="cabinet-demo-note">Жеке кабинеттің демонстрациялық режимі. Деректер тек осы браузерде сақталады.</p>
-      </div>
-    </div>
-    <div class="reveal">
-      <div class="eyebrow">Жеке кабинет</div>
-      <h2>Қатысуды онлайн басқарыңыз</h2>
-      <p class="lead" style="margin:16px 0 28px;">Тіркелу, мүшелік ақысын төлеу, өтінімдер және құжаттар — бір жерде.</p>
-      <div class="grid cabinet-feature-grid"><div class="glass card" style="padding:20px;"><p>Мүшелік ақысын онлайн төлеу</p></div><div class="glass card" style="padding:20px;"><p>Департаменттерге өтінімдер</p></div><div class="glass card" style="padding:20px;"><p>Құжаттарды сақтау</p></div><div class="glass card" style="padding:20px;"><p>Хабарландырулар</p></div><div class="glass card" style="padding:20px;"><p>Іс-шараларға тіркелу</p></div><div class="glass card" style="padding:20px;"><p>Мүше профилі</p></div></div>
-    </div>
-  </div>
-</section>
+</div>
 
 <section class="section" id="contacts">
   <div class="container contacts-wrap">
@@ -760,7 +746,7 @@
       </div>
       <div>
         <h4>Навигация</h4>
-        <ul><li><a href="#about">Біз туралы</a></li><li><a href="#structure">Құрылым</a></li><li><a href="#membership">Мүшелік</a></li><li><a href="#regions">Аймақтар</a></li><li><a href="#news">Жаңалықтар</a></li><li><a href="#events">Іс-шаралар</a></li></ul>
+        <ul><li><a href="#about">Біз туралы</a></li><li><a href="#structure">Құрылым</a></li><li><a href="#membership">Мүшелік</a></li><li><a href="#regions">Аймақтар</a></li><li><a href="/kk/news/">Жаңалықтар</a></li><li><a href="/kk/events/">Іс-шаралар</a></li></ul>
       </div>
       <div>
         <h4>Департаменттер</h4>
@@ -780,6 +766,6 @@
 
 <div class="toast" id="toast"></div>
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-<script defer src="/js/main.js?v=1782028825"></script>
+<script defer src="/js/main.js?v=1782031699"></script>
 </body>
 </html>
