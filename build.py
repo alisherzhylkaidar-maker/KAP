@@ -10,7 +10,7 @@ To add a new language later:
   2. Add the code to LANGS below
   3. Re-run: python3 build.py
 """
-import json, os, html
+import json, os, html, time
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 LOCALES_DIR = os.path.join(ROOT, "locales")
@@ -20,6 +20,7 @@ LANGS = ["kk", "ru", "en"]          # active languages, kk = default
 DEFAULT_LANG = "kk"
 SITE_NAME = "site.kz"               # placeholder domain, replace with real domain on deploy
 BASE_URL = "https://site.kz"        # placeholder absolute base for canonical/hreflang/schema
+BUILD_VERSION = str(int(time.time()))  # changes every build -> guarantees fresh CSS/JS, bypasses any stale CDN/browser cache
 
 FUTURE_LANGS = ["tr", "zh", "ar", "de", "fr", "ky", "uz"]  # reserved, not yet active
 
@@ -110,7 +111,7 @@ def render_page(lang):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/style.css?v={BUILD_VERSION}" />
 <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script>
 </head>
@@ -157,7 +158,7 @@ def render_page(lang):
     # ---------- HERO ----------
     hero = f"""
 <section class="hero">
-  <div class="hero-bg"><div class="hero-grid"></div></div>
+  <div class="hero-bg"><img src="/assets/hero-illustration.svg" alt="" class="hero-illustration" /></div>
   <div class="container hero-content">
     <div class="eyebrow">{e(d['hero']['eyebrow'])}</div>
     <h1>{e(d['hero']['title'])}</h1>
@@ -564,10 +565,10 @@ def render_page(lang):
 </footer>
 """
 
-    toast_and_scripts = """
+    toast_and_scripts = f"""
 <div class="toast" id="toast"></div>
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-<script defer src="/js/main.js"></script>
+<script defer src="/js/main.js?v={BUILD_VERSION}"></script>
 </body>
 </html>
 """
