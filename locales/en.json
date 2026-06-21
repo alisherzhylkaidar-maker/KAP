@@ -268,12 +268,12 @@
     "subtitle": "Association coordinators work in the country's regions, providing local access to services.",
     "mapNote": "Interactive map of regional offices",
     "items": [
-      { "city": "Astana", "role": "Association headquarters" },
-      { "city": "Almaty", "role": "Regional office" },
-      { "city": "Shymkent", "role": "Regional coordinator" },
-      { "city": "Atyrau", "role": "Regional coordinator" },
-      { "city": "Karaganda", "role": "Regional coordinator" },
-      { "city": "Aktobe", "role": "Regional coordinator" }
+      { "city": "Astana", "role": "Association headquarters", "lat": 51.1605, "lng": 71.4704 },
+      { "city": "Almaty", "role": "Regional office", "lat": 43.2220, "lng": 76.8512 },
+      { "city": "Shymkent", "role": "Regional coordinator", "lat": 42.3417, "lng": 69.5901 },
+      { "city": "Atyrau", "role": "Regional coordinator", "lat": 47.1164, "lng": 51.8830 },
+      { "city": "Karaganda", "role": "Regional coordinator", "lat": 49.8047, "lng": 73.1094 },
+      { "city": "Aktobe", "role": "Regional coordinator", "lat": 50.2839, "lng": 57.2094 }
     ]
   },
   "news": {

@@ -221,6 +221,45 @@
     });
   }
 
+  /* ---------- Regions map (Leaflet, free OpenStreetMap tiles, no API key) ---------- */
+  var mapEl = document.getElementById('regions-map');
+  if (mapEl && window.L) {
+    try {
+      var points = JSON.parse(mapEl.getAttribute('data-points') || '[]');
+      if (points.length) {
+        var map = L.map('regions-map', {
+          scrollWheelZoom: false,
+          attributionControl: true
+        }).setView([48.5, 67.5], 5);
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+          subdomains: 'abcd',
+          maxZoom: 19
+        }).addTo(map);
+
+        var goldIcon = L.divIcon({
+          className: 'map-pin-icon',
+          html: '<span class="map-pin-dot"></span>',
+          iconSize: [16, 16],
+          iconAnchor: [8, 8]
+        });
+
+        var bounds = [];
+        points.forEach(function (p) {
+          var marker = L.marker([p.lat, p.lng], { icon: goldIcon }).addTo(map);
+          marker.bindPopup('<strong>' + p.city + '</strong><br>' + p.role);
+          bounds.push([p.lat, p.lng]);
+        });
+        if (bounds.length > 1) {
+          map.fitBounds(bounds, { padding: [30, 30] });
+        }
+      }
+    } catch (err) {
+      console.error('Regions map failed to init:', err);
+    }
+  }
+
   /* ---------- Language auto-detect (first visit only, root redirect handles this; here just persist choice) ---------- */
   document.querySelectorAll('[data-lang-link]').forEach(function(link){
     link.addEventListener('click', function(){

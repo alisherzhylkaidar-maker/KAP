@@ -24,7 +24,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <link rel="stylesheet" href="/css/style.css" />
+<script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Kazakhstan Entrepreneurs Association", "alternateName": "Kazakhstan Entrepreneurs Association — the national business union", "url": "https://site.kz/en/", "logo": "https://site.kz/assets/logo.png", "description": "The Kazakhstan Entrepreneurs Association unites the country's business community, protects entrepreneurs' interests, and develops Kazakhstan's business environment.", "contactPoint": {"@type": "ContactPoint", "telephone": "+7 (700) 000-00-00", "email": "info@kz-entrepreneurs.kz", "contactType": "customer service"}, "address": {"@type": "PostalAddress", "addressLocality": "Astana", "addressCountry": "KZ", "streetAddress": "1201, Adilet Business Center, Mangilik El Ave., Astana, Kazakhstan"}}</script>
 </head>
 <body>
@@ -45,6 +47,7 @@
 </header>
 <div class="mobile-nav">
   <a href="#about">About</a><a href="#structure">Structure</a><a href="#membership">Membership</a><a href="#regions">Regions</a><a href="#news">News</a><a href="#events">Events</a><a href="#partners">Partners</a><a href="#ai">AI Assistant</a><a href="#cabinet">Member Area</a><a href="#contacts">Contacts</a>
+  <a href="#cabinet" class="btn btn-gold" style="margin-top:8px;">Join</a>
   <div class="lang-switch"><a href="/kk/" data-lang-link="kk" class="">ҚАЗ</a><a href="/ru/" data-lang-link="ru" class="">РУС</a><a href="/en/" data-lang-link="en" class="active">ENG</a></div>
 </div>
 
@@ -614,7 +617,7 @@
       <h2>Offices across Kazakhstan</h2>
       <p class="lead" style="margin-top:16px;">Association coordinators work in the country&#x27;s regions, providing local access to services.</p>
       <div class="glass map-frame" style="margin-top:30px;">
-        <span class="pin" style="top:12%; left:20%;"></span><span class="pin" style="top:25%; left:31%;"></span><span class="pin" style="top:38%; left:42%;"></span><span class="pin" style="top:51%; left:53%;"></span><span class="pin" style="top:64%; left:64%;"></span><span class="pin" style="top:77%; left:75%;"></span>
+        <div id="regions-map" data-points='[{"city": "Astana", "role": "Association headquarters", "lat": 51.1605, "lng": 71.4704}, {"city": "Almaty", "role": "Regional office", "lat": 43.222, "lng": 76.8512}, {"city": "Shymkent", "role": "Regional coordinator", "lat": 42.3417, "lng": 69.5901}, {"city": "Atyrau", "role": "Regional coordinator", "lat": 47.1164, "lng": 51.883}, {"city": "Karaganda", "role": "Regional coordinator", "lat": 49.8047, "lng": 73.1094}, {"city": "Aktobe", "role": "Regional coordinator", "lat": 50.2839, "lng": 57.2094}]'></div>
         <span class="map-caption">Interactive map of regional offices</span>
       </div>
     </div>
@@ -778,6 +781,6 @@
 
 <div class="toast" id="toast"></div>
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-<script src="/js/main.js"></script>
+<script defer src="/js/main.js"></script>
 </body>
 </html>

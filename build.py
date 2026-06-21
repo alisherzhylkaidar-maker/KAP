@@ -109,7 +109,9 @@ def render_page(lang):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <link rel="stylesheet" href="/css/style.css" />
+<script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script>
 </head>
 <body>
@@ -148,6 +150,7 @@ def render_page(lang):
 </header>
 <div class="mobile-nav">
   {mobile_nav}
+  <a href="#cabinet" class="btn btn-gold" style="margin-top:8px;">{e(d['topbar']['join'])}</a>
   {lang_switch_html(lang, mobile=True)}
 </div>
 """
@@ -357,8 +360,9 @@ def render_page(lang):
         f'''<div class="region-row"><span class="city">{e(r['city'])}</span><span class="role">{e(r['role'])}</span></div>'''
         for r in d["regions"]["items"]
     )
-    pins = "".join(
-        f'<span class="pin" style="top:{12+i*13}%; left:{(20+i*11)%80}%;"></span>' for i in range(len(d["regions"]["items"]))
+    map_points = json.dumps(
+        [{"city": r["city"], "role": r["role"], "lat": r["lat"], "lng": r["lng"]} for r in d["regions"]["items"]],
+        ensure_ascii=False
     )
     regions_section = f"""
 <section class="section section-tight" id="regions">
@@ -368,7 +372,7 @@ def render_page(lang):
       <h2>{e(d['regions']['title'])}</h2>
       <p class="lead" style="margin-top:16px;">{e(d['regions']['subtitle'])}</p>
       <div class="glass map-frame" style="margin-top:30px;">
-        {pins}
+        <div id="regions-map" data-points='{map_points}'></div>
         <span class="map-caption">{e(d['regions']['mapNote'])}</span>
       </div>
     </div>
@@ -564,7 +568,7 @@ def render_page(lang):
     toast_and_scripts = """
 <div class="toast" id="toast"></div>
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-<script src="/js/main.js"></script>
+<script defer src="/js/main.js"></script>
 </body>
 </html>
 """
